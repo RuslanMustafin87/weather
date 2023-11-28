@@ -6,7 +6,7 @@ export default {
   data() {
     return {
       weather: null,
-      city: 'Chishmy',
+      city: '',
       today: new Date().toLocaleString("ru-RU", {weekday: "short", day: "numeric", month: "long", year: "numeric"})
     }
   },
@@ -23,14 +23,15 @@ export default {
   },
   computed: {
     src(){
-      return`https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`
+      // return`https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`
+      return `src/assets/${this.weather.weather[0].icon}.svg`
     }
   }
 }
 </script>
 
 <template>
-<input class="input-city" type="text" v-model="city" @keyup.enter="getWeather">
+<input class="input-city" type="text" placeholder="Введите город" v-model="city" @keyup.enter="getWeather">
 
 <br>
 <button type="button" style="margin: 20px;" @click="getWeather">Узнать погоду</button>
@@ -39,14 +40,15 @@ export default {
   <div class="city"> {{ weather.name }}</div>
   <div class="date"> {{ today }}</div>
   <div class="wind">Ветер:  {{ weather.wind.speed }} м/с</div>
-  <!-- <div class="weather">{{ weather.weather[0].main }}</div> -->
-  <img :src="src" alt="">
+  <div class="weather">{{ weather.weather[0].main }}</div>
+  <img :src="`./assets/img/${this.weather.weather[0].icon}.svg`" alt="">
 </div>
-<div v-else>City not find</div>
+<div v-else>Город не найден</div>
 </template>
 
 <style scoped>
 .input-city{
+  border-radius: 8px;
   width: 250px;
   height: 30px;
   padding-left: 10px;
