@@ -52,6 +52,7 @@ export default {
   width: 250px;
   height: 30px;
   padding-left: 10px;
+
 }
 .temp {
   font-size: 2rem;
